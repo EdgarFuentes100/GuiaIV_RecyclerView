@@ -12,6 +12,7 @@ public class ElegirTipoTrabajadorActivity extends AppCompatActivity {
     Button btnSiguiente;
     private Bundle bundle;
     private int idEleccion = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +22,8 @@ public class ElegirTipoTrabajadorActivity extends AppCompatActivity {
         rbTTCompleto = findViewById(R.id.rbTTCompleto);
         btnSiguiente = findViewById(R.id.btnSiguiente);
 
-        rbTHora.setOnClickListener(v -> idEleccion = 1); // En caso de que el usuario elija libro
-        rbTTCompleto.setOnClickListener(v -> idEleccion = 2); // En caso de que el usuario elija revista
+        rbTHora.setOnClickListener(v -> idEleccion = 1); // En caso de que el usuario elija Trabajador por hora
+        rbTTCompleto.setOnClickListener(v -> idEleccion = 2); // En caso de que el usuario elija Trabajador a tiempo completo
 
         btnSiguiente.setOnClickListener(v -> {
             bundle = new Bundle();
