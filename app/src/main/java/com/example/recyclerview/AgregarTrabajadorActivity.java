@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.recyclerview.databinding.ActivityAgregarTrabajadorBinding;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,50 +19,33 @@ import com.example.recyclerview.models.TrabajadorHora;
 import com.example.recyclerview.models.TrabajadorTiempoCompleto;
 
 public class AgregarTrabajadorActivity extends AppCompatActivity {
-    Button btnAgregar;
-    private TextInputEditText edtSalario, edtCodigo, edtNombre, edtApellido, edtEdad, edtValor, edtHora;
-    // private TextView tvSalario, tvCodigo, tvNombre, tvApellido, tvEdad, tvValor, tvHora;
+    private ActivityAgregarTrabajadorBinding binding;
     private Bundle bundle;
     private int idEleccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agregar_trabajador);
+        binding = ActivityAgregarTrabajadorBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        btnAgregar = findViewById(R.id.btnAgregar);
-
-        edtSalario = findViewById(R.id.edtSalario);
-        edtCodigo = findViewById(R.id.edtCodigo);
-        edtNombre = findViewById(R.id.edtNombre);
-        edtApellido = findViewById(R.id.edtApellido);
-        edtEdad = findViewById(R.id.edtEdad);
-        edtValor = findViewById(R.id.edtValor);
-        edtHora = findViewById(R.id.edtHora);
-
-        /*tvSalario = findViewById(R.id.tvSalario);
-        tvValor = findViewById(R.id.tvValor);
-        tvHora= findViewById(R.id.tvHora);*/
 
         bundle = getIntent().getExtras();
         idEleccion = bundle.getInt("tipoEleccion");
 
         if(idEleccion == 1){
             // Es Trabajador hora
-            //tvSalario.setVisibility(View.GONE);
-            edtSalario.setVisibility(View.GONE);
+            binding.edtSalario.setVisibility(View.GONE);
 
         }else{
             // Es tiempo completo
-
-            //tvValor.setVisibility(View.GONE);
-            edtValor.setVisibility(View.GONE);
-            //tvHora.setVisibility(View.GONE);
-            edtHora.setVisibility(View.GONE);
+            binding.edtValor.setVisibility(View.GONE);
+            binding.edtHora.setVisibility(View.GONE);
 
         }
 
-        btnAgregar.setOnClickListener(view -> {
+        binding.btnAgregar.setOnClickListener(v -> {
             if(idEleccion == 1){
                 // Es Trabajador hora
                 AgregarTrabajadorHora();
@@ -80,65 +65,65 @@ public class AgregarTrabajadorActivity extends AppCompatActivity {
     }
 
     private void AgregarTrabajadorTiempoCompleto() {
-        if(edtCodigo.getText().toString().equals("")){
+        if(binding.edtCodigo.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el codigo", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtNombre.getText().toString().equals("")){
+        if(binding.edtNombre.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el nombre", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtApellido.getText().toString().equals("")){
+        if(binding.edtApellido.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el apellido", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtEdad.getText().toString().equals("")){
+        if(binding.edtEdad.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar la edad", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtSalario.getText().toString().equals("")){
+        if(binding.edtSalario.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el salario", Toast.LENGTH_SHORT).show();
             return;
         }
 
         lstTrabajadores.add(
                 new TrabajadorTiempoCompleto(
-                        edtCodigo.getText().toString(), edtNombre.getText().toString(),
-                        edtApellido.getText().toString(), Float.valueOf(edtSalario.getText().toString()))
+                        binding.edtCodigo.getText().toString(), binding.edtNombre.getText().toString(),
+                        binding.edtApellido.getText().toString(), Float.valueOf(binding.edtSalario.getText().toString()))
         );
     }
 
     private void AgregarTrabajadorHora() {
-        if(edtCodigo.getText().toString().equals("")){
+        if(binding.edtCodigo.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el codigo", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtNombre.getText().toString().equals("")){
+        if(binding.edtNombre.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el nombre", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtApellido.getText().toString().equals("")){
+        if(binding.edtApellido.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el apellido", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtEdad.getText().toString().equals("")){
+        if(binding.edtEdad.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar la edad", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtValor.getText().toString().equals("")){
+        if(binding.edtValor.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar el valor de la hora", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(edtHora.getText().toString().equals("")){
+        if(binding.edtHora.getText().toString().equals("")){
             Toast.makeText(this, "Debe ingresar las horas trabajadas", Toast.LENGTH_SHORT).show();
             return;
         }
 
         lstTrabajadores.add(
                 new TrabajadorHora(
-                        edtCodigo.getText().toString(), edtNombre.getText().toString(),
-                        edtApellido.getText().toString(), Integer.parseInt(edtHora.getText().toString()),
-                        Float.valueOf(edtValor.getText().toString()))
+                        binding.edtCodigo.getText().toString(), binding.edtNombre.getText().toString(),
+                        binding.edtApellido.getText().toString(), Integer.parseInt(binding.edtHora.getText().toString()),
+                        Float.valueOf(binding.edtValor.getText().toString()))
         );
     }
 }

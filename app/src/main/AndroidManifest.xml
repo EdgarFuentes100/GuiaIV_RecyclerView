@@ -13,6 +13,10 @@
         android:theme="@style/Theme.RecyclerView"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+
             android:name=".MostrarListaActivity"
             android:exported="false" />
         <activity
@@ -25,7 +29,7 @@
             android:name=".AcercaDe"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
